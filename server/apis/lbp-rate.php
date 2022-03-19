@@ -14,5 +14,6 @@
     curl_close($ch);
 
     $json = json_decode($output, true);
-    print_r($json);
+    $response = json_encode($json);
+    echo $response;
 ?>
