@@ -11,6 +11,8 @@
     curl_setopt($ch, CURLOPT_URL, $api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $output = curl_exec($ch);
-    echo $output;
     curl_close($ch);
+
+    $json = json_decode($output, true);
+    print_r($json);
 ?>
