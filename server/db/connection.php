@@ -3,11 +3,15 @@
 
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "./../");
     $dotenv->load();
-    echo $_ENV['db_name'];
 
-    // $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $db_host = $_ENV['DB_HOST'];
+    $db_user = $_ENV['DB_USER'];
+    $db_pass = $_ENV['DB_PASS'];
+    $db_name = $_ENV['DB_NAME'];
 
-    // if (mysqli_connect_errno()) {
-    //     die("Connection failed");
-    // }
+    $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    if (mysqli_connect_errno()) {
+        die("Connection failed");
+    }
 ?>
