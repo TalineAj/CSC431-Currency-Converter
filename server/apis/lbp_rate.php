@@ -12,8 +12,5 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $output = curl_exec($ch);
     curl_close($ch);
-
-    $json = json_decode($output, true);
-    $response = json_encode($json);
-    echo $response;
+    echo $output;
 ?>
