@@ -10,7 +10,15 @@
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($ch);
+    $json_response = curl_exec($ch);
     curl_close($ch);
-    echo $output;
+
+    $array = json_decode($json_response);
+    $value;
+    foreach ($array as $key => $v) {
+        $value = $v;
+    }
+    $last_item = end($value);
+    $rate = intval($last_item[1]);
+    echo $rate;
 ?>
