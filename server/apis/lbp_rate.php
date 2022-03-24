@@ -20,5 +20,7 @@
     }
     $last_item = end($value);
     $rate = intval($last_item[1]);
-    echo $rate;
+    $array_response = array("rate" => $rate);
+    $json_response = json_encode($array_response);
+    echo $json_response;
 ?>
