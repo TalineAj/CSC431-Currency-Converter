@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         //The code in line 23-->27 is not my own code, it was retrieved when I searched how to change the status bar color from:
         //https://www.geeksforgeeks.org/how-to-change-the-color-of-status-bar-in-an-android-app/
-        //N.b: Button color and action bar were also changed and hidden respectively from the values folder
+        //N.b: Button color and action bar were also changed and hidden respectively from the themes and values folders (as well as of course layout)
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.teal_200));
         }
     }
+
 
 }
