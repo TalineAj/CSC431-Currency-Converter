@@ -21,9 +21,10 @@
         app:layout_constraintVertical_bias="0.122" />
 
     <ImageView
-        android:id="@+id/currencyimg_convert"
+        android:id="@+id/logoconvert"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:onClick="LogoConvert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -33,11 +34,11 @@
         app:srcCompat="@drawable/convert" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/dollar"
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/currencyimg_convert"
+        app:layout_constraintEnd_toStartOf="@+id/logoconvert"
         app:layout_constraintHorizontal_bias="0.886"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal"
@@ -45,13 +46,13 @@
         app:srcCompat="@drawable/dollar" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/lbp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toEndOf="@+id/currencyimg_convert"
+        app:layout_constraintStart_toEndOf="@+id/logoconvert"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal"
         app:layout_constraintVertical_bias="0.058"
         app:srcCompat="@drawable/lbp" />
@@ -66,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currencyimg_convert"
+        app:layout_constraintTop_toBottomOf="@+id/logoconvert"
         app:layout_constraintVertical_bias="0.552" />
 
     <ImageView
@@ -77,16 +78,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Convert" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="Convert"
         android:text="Convert"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currencyimg_convert" />
+        app:layout_constraintTop_toBottomOf="@+id/logoconvert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
