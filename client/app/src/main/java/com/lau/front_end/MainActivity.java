@@ -2,6 +2,7 @@ package com.lau.front_end;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void Convert( View view){
-        amount.setText(input.getText().toString());
+        if(change)//if it is true this means it is from usd to lbp
+        amount.setText("L.L");
+        else{
+            amount.setText("$");
+        }
     }
 
 }
