@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView usd;
     ImageView lbp;
+    EditText input;
+    TextView amount;
     boolean change = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
         }
         usd = (ImageView) findViewById(R.id.dollar);
         lbp = (ImageView) findViewById(R.id.lbp);
-
+        input = (EditText) findViewById(R.id.input);
+        amount=(TextView) findViewById(R.id.amount);
     }
     public void LogoConvert(View view) {
-        if (change) {
+        //Converts the logo images when the user clicks on the convert logo
+        if (change) { //boolean to allow it to switch both ways
             usd.setImageResource(R.drawable.lbp);
             lbp.setImageResource(R.drawable.dollar);
             change = false;
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
             lbp.setImageResource(R.drawable.lbp);
             change = true;
         }
+    }
+    public void Convert( View view){
+        amount.setText(input.getText().toString());
     }
 
 }
