@@ -10,7 +10,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-
+    ImageView usd;
+    ImageView lbp;
     boolean change = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,20 @@ public class MainActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.teal_200));
         }
-    }
+        usd = (ImageView) findViewById(R.id.dollar);
+        lbp = (ImageView) findViewById(R.id.lbp);
 
+    }
+    public void LogoConvert(View view) {
+        if (change) {
+            usd.setImageResource(R.drawable.lbp);
+            lbp.setImageResource(R.drawable.dollar);
+            change = false;
+        } else {
+            usd.setImageResource(R.drawable.dollar);
+            lbp.setImageResource(R.drawable.lbp);
+            change = true;
+        }
+    }
 
 }
