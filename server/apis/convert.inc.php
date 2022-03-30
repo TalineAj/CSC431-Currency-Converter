@@ -11,24 +11,24 @@
 
     $amount = $_POST["amount"];
     $currency = $_POST["currency"];
+    $query = $mysqli->prepare("INSERT INTO histories (amount, rate, currency) VALUES (?, ?, ?)");
+    $query->bind_param("iii", $amount, $rate, $currency);
 
     $response = [];
 
-    if(strcmp($currency, "lbp") === 0) {
-        echo "This is lbp";
+    if (strcmp($currency, "lbp") === 0) {
         $response["status"] = "200";
         $response["result"] = $amount / $rate;
-    } else if(strcmp($currency, "usd") === 0) {
-        echo "This is usd";
+        $query->execute();
+    } else if (strcmp($currency, "usd") === 0) {
         $response["status"] = "200";
         $response["result"] = $amount * $rate;
+        $query->execute();
+
     } else {
         $response["status"] = "404";
     }
 
-    $query = $mysqli->prepare("INSERT INTO histories (amount, rate, currency) VALUES (?, ?, ?)");
-    $query->bind_param("iii", $amount, $rate, $currency);
-    $query->execute();
-
     $json_response = json_encode($response);
     echo $json_response;
+?>
