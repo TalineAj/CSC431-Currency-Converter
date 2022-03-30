@@ -17,7 +17,6 @@ AndroidStudio is used to develop the frontend, and PHP for the backend.
 
 ## Credits
 
-<br>
 <img align="left" alt="Java" width="23px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="vertical-align: middle; padding-right: 10px;" /> 
 
 [@talineaj](https://github.com/TalineAj), [@kevinnammour](https://github.com/kevinnammour)
