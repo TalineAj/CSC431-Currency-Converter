@@ -1,6 +1,10 @@
 <?php
+    // This is the post api that gets the amount
+    // and currency and returns the result and rate.
+
     // connecting to the database
     require __DIR__ . '/../db/config.inc.php';
+    
     // Getting the json_response that includes the currency LBP rate
     include "lirarate.inc.php";
 
