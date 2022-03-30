@@ -28,7 +28,6 @@
     $last_item = end($value);
 
     // Fetches the rate at index 1: Array ( [0] => 1648623462000 [1] => 24100 )
-    print_r($last_item);
     $rate = intval($last_item[1]);
     $array_response = array("rate" => $rate);
     $json_response = json_encode($array_response);
