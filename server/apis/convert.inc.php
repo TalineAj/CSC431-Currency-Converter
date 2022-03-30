@@ -2,7 +2,7 @@
     // connecting to the database
     require __DIR__ . '/../db/config.inc.php';
     // Getting the json_response that includes the currency LBP rate
-    include "rate.inc.php";
+    include "lirarate.inc.php";
 
     $key = "rate";
     $arr = json_decode($json_response, true);
@@ -19,10 +19,12 @@
     if (strcmp($currency, "lbp") === 0) {
         $response["status"] = "200";
         $response["result"] = $amount / $rate;
+        $response["rate"] = $rate;
         $query->execute();
     } else if (strcmp($currency, "usd") === 0) {
         $response["status"] = "200";
         $response["result"] = $amount * $rate;
+        $response["rate"] = $rate;
         $query->execute();
 
     } else {
