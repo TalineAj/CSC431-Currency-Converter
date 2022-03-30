@@ -22,5 +22,5 @@
     $rate = intval($last_item[1]);
     $array_response = array("rate" => $rate);
     $json_response = json_encode($array_response);
-    echo $json_response;
+   
 ?>
