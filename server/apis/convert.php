@@ -1,7 +1,7 @@
 <?php
-    require(__DIR__ . '/../db/connection.php');
+    require __DIR__ . '/../db/config.php';
 
-    include("lbp_rate.php");
+    include "rate.php";
     $key = "rate";
     $arr = json_decode($json_response, true);
     $rate = $arr[$key];
@@ -17,5 +17,3 @@
 
     $json_response = json_encode($response);
     echo $json_response;
-    
-?>
