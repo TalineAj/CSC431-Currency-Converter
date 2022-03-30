@@ -1,10 +1,14 @@
 <?php
+    // connecting to the database
     require __DIR__ . '/../db/config.php';
-
+    // Getting the json_response that includes the currency LBP rate
     include "rate.php";
+
     $key = "rate";
     $arr = json_decode($json_response, true);
+    // Extracting the rate from the array
     $rate = $arr[$key];
+
     $amount = $_POST["amount"];
     $currency = $_POST["currency"];
 
