@@ -3,6 +3,7 @@ package com.lau.front_end;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,51 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     ImageView usd;
     ImageView lbp;
     EditText input;
     TextView amount;
     boolean change = true;
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... urls) {
+            String result = ""; //to store result
+            URL url;
+            HttpURLConnection http;
+
+            try {
+                url = new URL(urls[0]);
+                http = (HttpURLConnection) url.openConnection(); //connecting api
+
+                InputStream in = http.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                int data = reader.read();
+
+                while (data != -1) { //reading character by character
+                    char current = (char) data;
+                    result += current;
+                    data = reader.read();
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return result;
+        }
+
+
+
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         lbp = (ImageView) findViewById(R.id.lbp);
         input = (EditText) findViewById(R.id.input);
         amount=(TextView) findViewById(R.id.amount);
+
     }
     public void LogoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
@@ -50,11 +91,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void Convert( View view){
-        if(change)//if it is true this means it is from usd to lbp
-        amount.setText("L.L");
-        else{
-            amount.setText("$");
-        }
+    //if change is true this means it is from usd to lbp
+
     }
 
 }
