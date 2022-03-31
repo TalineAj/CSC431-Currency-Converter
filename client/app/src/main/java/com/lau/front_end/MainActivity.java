@@ -54,7 +54,18 @@ public class MainActivity extends AppCompatActivity {
             }
             return result;
         }
+        protected void onPostExecute(String s) {
+      //  handling data
 
+            super.onPostExecute(s);
+            try {
+                JSONObject json = new JSONObject(s);
+                String rate = json.getString("rate");
+                rate_view.setText(rate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
 
@@ -78,6 +89,18 @@ public class MainActivity extends AppCompatActivity {
         input = (EditText) findViewById(R.id.input);
         amount=(TextView) findViewById(R.id.amount);
         rate_view=(TextView) findViewById(R.id.rate);
+
+        //get api
+
+         String url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/rate.inc.php";
+
+         DownloadTask task = new DownloadTask();
+         task.execute(url);
+
+
+
+
+
     }
     public void LogoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
