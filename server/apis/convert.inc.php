@@ -8,11 +8,6 @@
     // Getting the json_response that includes the currency LBP rate
     include "lirarate.inc.php";
 
-    $key = "rate";
-    $arr = json_decode($json_response, true);
-    // Extracting the rate from the array
-    $rate = $arr[$key];
-
     $amount = $_POST["amount"];
     $currency = $_POST["currency"];
     $query = $mysqli->prepare("INSERT INTO histories (amount, rate, currency) VALUES (?, ?, ?)");

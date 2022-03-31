@@ -8,27 +8,26 @@
     // Concatinating the year, month, day, and hour in order
     // to put it at the end of the API url
     $ver = $year . $month . $day . $hour;
-
     $api_url = "https://lirarate.org/wp-json/lirarate/v2/omt?currency=LBP&_ver=t$ver";
 
+    // Calling the api and storing the result in a json format
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $json_response = curl_exec($ch);
     curl_close($ch);
 
-    // Decodes the json object and puts it in an stdClass Object
-    $array = json_decode($json_response);
-    $value;
-    foreach ($array as $key => $v) {
-        $value = $v;
+    // Decodes the $json_response and puts it in an stdClass Object
+    $std_obj = json_decode($json_response);
+
+    // Turns the $std_obj to an array
+    // Turning the $json_response direclty to an array won't give the same format
+    $array = json_decode(json_encode($std_obj), true);
+    $length = count($array['omt']);
+
+    $rate = null;
+
+    if ($length >= 1) {
+        $rate = $array['omt'][$length - 1][1];
     }
-
-    // Brings the last object in the array
-    $last_item = end($value);
-
-    // Fetches the rate at index 1: Array ( [0] => 1648623462000 [1] => 24100 )
-    $rate = intval($last_item[1]);
-    $array_response = array("rate" => $rate);
-    $json_response = json_encode($array_response);
 ?>
