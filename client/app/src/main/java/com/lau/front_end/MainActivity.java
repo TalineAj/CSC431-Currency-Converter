@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView lbp;
     EditText input;
     TextView amount;
+    TextView rate_view;
     boolean change = true;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         lbp = (ImageView) findViewById(R.id.lbp);
         input = (EditText) findViewById(R.id.input);
         amount=(TextView) findViewById(R.id.amount);
-
+        rate_view=(TextView) findViewById(R.id.rate);
     }
     public void LogoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
