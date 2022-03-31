@@ -10,8 +10,9 @@
 
     $amount = $_POST["amount"];
     $currency = $_POST["currency"];
+    echo $currency;
     $query = $mysqli->prepare("INSERT INTO histories (amount, rate, currency) VALUES (?, ?, ?)");
-    $query->bind_param("iii", $amount, $rate, $currency);
+    $query->bind_param("iis", $amount, $rate, $currency);
 
     $response = [];
 
