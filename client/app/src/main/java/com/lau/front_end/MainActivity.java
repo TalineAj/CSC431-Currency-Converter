@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     EditText input;
     TextView amount;
     TextView rate_view;
-    boolean change = true;
+    boolean is_usd = true;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls) {
@@ -115,15 +115,14 @@ public class MainActivity extends AppCompatActivity {
     }
     public void logoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
-        if (change) { //boolean to allow it to switch both ways
+        if (is_usd) { //boolean to allow it to switch both ways
             usd.setImageResource(R.drawable.lbp);
             lbp.setImageResource(R.drawable.dollar);
-            change = false;
         } else {
             usd.setImageResource(R.drawable.dollar);
             lbp.setImageResource(R.drawable.lbp);
-            change = true;
         }
+        is_usd = !is_usd;
     }
     public void convert( View view){
         //this code was retrieved online after a lot of research and appropriate changes were made to fit into our app
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(post_url);
                 String currency, amount;
-                currency = (change) ? "usd" : "lbp";
+                currency = (is_usd) ? "usd" : "lbp";
                 amount = input.getText().toString();
                 BasicNameValuePair usernameBasicNameValuePair = new BasicNameValuePair("currency", currency);
                 BasicNameValuePair passwordBasicNameValuePAir = new BasicNameValuePair("amount", amount);
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         String result = json.getString("result");
                         DecimalFormat decimal_format = new DecimalFormat(".##");
                         result = decimal_format.format(Double.parseDouble(result));
-                        result += (change) ? " LBP": " USD";
+                        result += (is_usd) ? " LBP": " USD";
                         amount.setText(result);// setting the converted
                         String new_rate = "1 USD = " + json.getString("rate") + " LBP";
                         rate_view.setText(new_rate); // setting the new rate
