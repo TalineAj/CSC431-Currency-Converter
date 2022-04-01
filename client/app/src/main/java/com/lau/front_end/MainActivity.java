@@ -39,6 +39,32 @@ public class MainActivity extends AppCompatActivity {
     TextView amount;
     TextView rate_view;
     boolean is_usd = true;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //The below is not my own code, it was retrieved when I searched how to change the status bar color from:
+        //https://www.geeksforgeeks.org/how-to-change-the-color-of-status-bar-in-an-android-app/
+        //N.b: Button color and action bar were also changed and hidden respectively from the themes and values folders (as well as of course layout)
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.teal_200));
+        }
+        usd = (ImageView) findViewById(R.id.dollar);
+        lbp = (ImageView) findViewById(R.id.lbp);
+        input = (EditText) findViewById(R.id.input);
+        amount=(TextView) findViewById(R.id.amount);
+        rate_view=(TextView) findViewById(R.id.rate);
+
+        //get api
+
+        String url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/rate.inc.php";
+
+        DownloadTask task = new DownloadTask();
+        task.execute(url);
+    }
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls) {
@@ -82,37 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //The below is not my own code, it was retrieved when I searched how to change the status bar color from:
-        //https://www.geeksforgeeks.org/how-to-change-the-color-of-status-bar-in-an-android-app/
-        //N.b: Button color and action bar were also changed and hidden respectively from the themes and values folders (as well as of course layout)
-        if (Build.VERSION.SDK_INT >= 21) {
-            Window window = this.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(this.getResources().getColor(R.color.teal_200));
-        }
-        usd = (ImageView) findViewById(R.id.dollar);
-        lbp = (ImageView) findViewById(R.id.lbp);
-        input = (EditText) findViewById(R.id.input);
-        amount=(TextView) findViewById(R.id.amount);
-        rate_view=(TextView) findViewById(R.id.rate);
 
-        //get api
-
-         String url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/rate.inc.php";
-
-         DownloadTask task = new DownloadTask();
-         task.execute(url);
-
-
-
-
-
-    }
     public void logoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
         if (is_usd) { //boolean to allow it to switch both ways
