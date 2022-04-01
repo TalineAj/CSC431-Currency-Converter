@@ -13,12 +13,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ImageView usd;
@@ -115,8 +127,69 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void Convert( View view){
-    //if change is true this means it is from usd to lbp
+        //this code was retrieved online after a lot of research and appropriate changes were made to fit into our app
+        String post_url = "http://192.168.1.5/CSC431-Currency-Converter/server/apis/convert.inc.php";
 
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost(post_url);
+                String currency, amount;
+                currency = (change) ? "usd" : "lbp";
+                amount = input.getText().toString();
+                BasicNameValuePair usernameBasicNameValuePair = new BasicNameValuePair("currency", currency);
+                BasicNameValuePair passwordBasicNameValuePAir = new BasicNameValuePair("amount", amount);
+                List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
+                nameValuePairList.add(usernameBasicNameValuePair);
+                nameValuePairList.add(passwordBasicNameValuePAir);
+
+                try {
+                    UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList);
+                    httpPost.setEntity(urlEncodedFormEntity);
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
+                    InputStream inputStream = httpResponse.getEntity().getContent();
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String bufferedStrChunk = null;
+                    while ((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(bufferedStrChunk);
+                    }
+                    return stringBuilder.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    JSONObject json = new JSONObject(s);
+                    String status = json.getString("status"); //the status was returned as a response from our api
+                    if (status.equalsIgnoreCase("200")) {// 200 Ok status means the operation was sucessfull
+                        String result = json.getString("result");
+                        DecimalFormat decimal_format = new DecimalFormat(".##");
+                        result = decimal_format.format(Double.parseDouble(result));
+                        result += (change) ? " LBP": " USD";
+                        amount.setText(result);// setting the converted
+                        String new_rate = "1 USD = " + json.getString("rate") + " LBP";
+                        rate_view.setText(new_rate); // setting the new rate
+                    } else {// if not then notify the user that something wrong happened
+                        amount.setText("Something wrong happened! Try again.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute();
     }
-
 }
+
