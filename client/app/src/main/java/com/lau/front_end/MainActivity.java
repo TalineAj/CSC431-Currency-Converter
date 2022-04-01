@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void convert( View view){
         //this code was retrieved online after a lot of research and appropriate changes were made to fit into our app
+       //Our code sets up the connection and then sends a post request with the specified parameter which are the amount to convert
+        //as well as the currency provided by the user, then it retrieves a response with the status, result and rate and each of these
+        //are displayed or manipulated appropriately
         String post_url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/convert.inc.php";
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
