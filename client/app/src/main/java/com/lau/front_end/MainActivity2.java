@@ -25,7 +25,7 @@ public class MainActivity2 extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.teal_200));
         }
     }
-    public void Next( View view){ //Question: should i also make a button that takes the user from the converting page to homepage or let them use the back button on phone?
+    public void Next( View view){
         Intent obj = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(obj);
     }

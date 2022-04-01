@@ -24,7 +24,7 @@
         android:id="@+id/logoconvert"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:onClick="LogoConvert"
+        android:onClick="logoConvert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -80,12 +80,12 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/Convert"
+        android:id="@+id/convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="Convert"
-        android:text="Convert"
         android:background="@color/teal_200"
+        android:onClick="convert"
+        android:text="Convert"
         app:layout_constraintBottom_toTopOf="@+id/amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Convert"
+        app:layout_constraintTop_toBottomOf="@+id/convert"
         app:layout_constraintVertical_bias="0.51" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

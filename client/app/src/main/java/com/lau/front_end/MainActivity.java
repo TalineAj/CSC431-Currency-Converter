@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
             try {
                 JSONObject json = new JSONObject(s);
-                String rate = json.getString("rate");
+                String rate = "1 USD = " + json.getString("rate") + " LBP";
                 rate_view.setText(rate);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //The code in line 23-->27 is not my own code, it was retrieved when I searched how to change the status bar color from:
+        //The below is not my own code, it was retrieved when I searched how to change the status bar color from:
         //https://www.geeksforgeeks.org/how-to-change-the-color-of-status-bar-in-an-android-app/
         //N.b: Button color and action bar were also changed and hidden respectively from the themes and values folders (as well as of course layout)
         if (Build.VERSION.SDK_INT >= 21) {
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void LogoConvert(View view) {
+    public void logoConvert(View view) {
         //Converts the logo images when the user clicks on the convert logo
         if (change) { //boolean to allow it to switch both ways
             usd.setImageResource(R.drawable.lbp);
@@ -126,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
             change = true;
         }
     }
-    public void Convert( View view){
+    public void convert( View view){
         //this code was retrieved online after a lot of research and appropriate changes were made to fit into our app
-        String post_url = "http://192.168.1.5/CSC431-Currency-Converter/server/apis/convert.inc.php";
+        String post_url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/convert.inc.php";
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
 
