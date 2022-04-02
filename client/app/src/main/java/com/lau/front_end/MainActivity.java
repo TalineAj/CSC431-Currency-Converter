@@ -133,30 +133,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
 
-                HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost(post_url);
+                HttpClient http_client = new DefaultHttpClient();
+                HttpPost http_post = new HttpPost(post_url);
                 String currency, amount;
                 currency = (is_usd) ? "usd" : "lbp";
                 amount = input.getText().toString();
-                BasicNameValuePair currencyBasicNameValuePair = new BasicNameValuePair("currency", currency);
-                BasicNameValuePair amountBasicNameValuePAir = new BasicNameValuePair("amount", amount);
-                List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
-                nameValuePairList.add(currencyBasicNameValuePair);
-                nameValuePairList.add(amountBasicNameValuePAir);
+                BasicNameValuePair currency_param = new BasicNameValuePair("currency", currency);
+                BasicNameValuePair amount_param = new BasicNameValuePair("amount", amount);
+                List<NameValuePair> name_value_pair_list = new ArrayList<NameValuePair>();
+                name_value_pair_list.add(currency_param);
+                name_value_pair_list.add(amount_param);
 
                 try {
-                    UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList);
-                    httpPost.setEntity(urlEncodedFormEntity);
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-                    InputStream inputStream = httpResponse.getEntity().getContent();
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String bufferedStrChunk = null;
-                    while ((bufferedStrChunk = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(bufferedStrChunk);
+                    UrlEncodedFormEntity url_encoded_form_entity = new UrlEncodedFormEntity(name_value_pair_list);
+                    http_post.setEntity(url_encoded_form_entity);
+                    HttpResponse http_response = http_client.execute(http_post);
+                    InputStream input_stream = http_response.getEntity().getContent();
+                    InputStreamReader input_stream_reader = new InputStreamReader(input_stream);
+                    BufferedReader buffered_reader = new BufferedReader(input_stream_reader);
+                    StringBuilder string_builder = new StringBuilder();
+                    String buffered_str_chunk = null;
+                    while ((buffered_str_chunk = buffered_reader.readLine()) != null) {
+                        string_builder.append(buffered_str_chunk);
                     }
-                    return stringBuilder.toString();
+                    return string_builder.toString();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
