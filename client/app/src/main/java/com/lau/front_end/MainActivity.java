@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
     TextView amount;
     TextView rate_view;
     boolean is_usd = true;
+    String result = ""; //to store result
+    URL url;
+    HttpURLConnection http;
+    String get_url;
+    String post_url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,18 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
         //get api
 
-        String url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/rate.inc.php";
+        get_url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/rate.inc.php";
 
         DownloadTask task = new DownloadTask();
-        task.execute(url);
+        task.execute(get_url);
     }
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls) {
-            String result = ""; //to store result
-            URL url;
-            HttpURLConnection http;
-
             try {
                 url = new URL(urls[0]);
                 http = (HttpURLConnection) url.openConnection(); //connecting api
@@ -121,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
         is_usd = !is_usd;
     }
     public void convert( View view){
-        //this code was retrieved online after a lot of research and appropriate changes were made to fit into our app
-       //Our code sets up the connection and then sends a post request with the specified parameter which are the amount to convert
-        //as well as the currency provided by the user, then it retrieves a response with the status, result and rate and each of these
-        //are displayed or manipulated appropriately
-        String post_url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/convert.inc.php";
+         //The code below is based on the HttpClient documentation
+         //Our code sets up the connection and then sends a post request with the specified parameter which are the amount to convert
+         //as well as the currency provided by the user, then it retrieves a response with the status, result and rate and each of these
+         //are displayed or manipulated appropriately
+         post_url = "http://192.168.2.201/CSC431-Currency-Converter/server/apis/convert.inc.php";
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
 
@@ -137,11 +138,11 @@ public class MainActivity extends AppCompatActivity {
                 String currency, amount;
                 currency = (is_usd) ? "usd" : "lbp";
                 amount = input.getText().toString();
-                BasicNameValuePair usernameBasicNameValuePair = new BasicNameValuePair("currency", currency);
-                BasicNameValuePair passwordBasicNameValuePAir = new BasicNameValuePair("amount", amount);
+                BasicNameValuePair currencyBasicNameValuePair = new BasicNameValuePair("currency", currency);
+                BasicNameValuePair amountBasicNameValuePAir = new BasicNameValuePair("amount", amount);
                 List<NameValuePair> nameValuePairList = new ArrayList<NameValuePair>();
-                nameValuePairList.add(usernameBasicNameValuePair);
-                nameValuePairList.add(passwordBasicNameValuePAir);
+                nameValuePairList.add(currencyBasicNameValuePair);
+                nameValuePairList.add(amountBasicNameValuePAir);
 
                 try {
                     UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList);
