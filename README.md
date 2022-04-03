@@ -13,7 +13,7 @@ AndroidStudio is used to develop the frontend, and PHP for the backend.
 2. Start Apache & MySQL in XAMPP Control Panel
 3. Go to http://localhost/phpmyadmin and create a Database called "converterdb"
 4. Create a table called histories and in it create 3 attributes: amount (double), rate (double), and currency (varchar(255))
-5. Create a .env file that contains the variables present in the .env.example file and fill them
+5. Create a .env file in the server folder and take a look at the environmental variables in .env.example and fill them in the .env 
 6. Go to the client and run the android app and interact with it
 
 ## Credits 👨‍💻👩‍💻
