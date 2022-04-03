@@ -5,6 +5,7 @@
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "./../");
     $dotenv->safeLoad();
 
+    // Create a .env file in the server directory, and fill it according to .env.example
     $db_host = $_ENV['DB_HOST'];
     $db_user = $_ENV['DB_USER'];
     $db_pass = $_ENV['DB_PASS'];

@@ -1,8 +1,9 @@
 <?php
-    // Extracting the year, month, day, and hour of the current timestamp
 
+    // Setting the timezone to Asia
     date_default_timezone_set('Asia/Beirut');
 
+    // Extracting the year, month, day, and hour of the current timestamp
     $year = intval(date('Y'));
     $month = intval(date('m'));
     $day = intval(date('d'));

@@ -32,8 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    String get_url = "http://192.168.1.4/CSC431-Currency-Converter/server/apis/rate.inc.php";
-    String post_url = "http://192.168.1.4/CSC431-Currency-Converter/server/apis/convert.inc.php";
+
+    // Put your ipv4 address here
+    String ipv4 = "192.168.1.4";
+    String get_url = "http://" + ipv4 + "/CSC431-Currency-Converter/server/apis/rate.inc.php";
+    String post_url = "http://" + ipv4 + "/CSC431-Currency-Converter/server/apis/convert.inc.php";
     ImageView from;
     ImageView to;
     EditText input_view;
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Getting the resulted amount of the conversion
                         String result = json.getString("result");
-                        DecimalFormat decimal_format = new DecimalFormat(".##");
+                        DecimalFormat decimal_format = new DecimalFormat(".###");
                         result = decimal_format.format(Double.parseDouble(result));
                         result += (is_usd) ? " LBP" : " USD";
 

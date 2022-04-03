@@ -1,35 +1,29 @@
 <?php
-    // This is the post api that gets the amount
-    // and currency and returns the result and rate.
+    // This is the post api that receives the amount
+    // and currency and returns the result and updated rate from lirarate.
 
     // connecting to the database
     require __DIR__ . '/../db/config.inc.php';
     
-    // Getting the json_response that includes the currency LBP rate
+    // Getting the $rate => LBP rate
     include "lirarate.inc.php";
 
-    $amount = $_POST["amount"];
+    $amount = doubleval($_POST["amount"]);
     $currency = $_POST["currency"];
     $query = $mysqli->prepare("INSERT INTO histories (amount, rate, currency) VALUES (?, ?, ?)");
-    $query->bind_param("iis", $amount, $rate, $currency);
+    $query->bind_param("dds", $amount, $rate, $currency);
 
-    $response = [];
+    $array_response;
 
     if (strcmp($currency, "lbp") === 0) {
-        $response["status"] = "200";
-        $response["result"] = $amount / $rate;
-        $response["rate"] = $rate;
+        $array_response= array("status" => 200, "result" => $amount / $rate, "rate" => $rate);
         $query->execute();
     } else if (strcmp($currency, "usd") === 0) {
-        $response["status"] = "200";
-        $response["result"] = $amount * $rate;
-        $response["rate"] = $rate;
+        $array_response= array("status" => 200, "result" => $amount * $rate, "rate" => $rate);
         $query->execute();
-
     } else {
-        $response["status"] = "404";
+        $array_response= array("status" => 404);
     }
-
-    $json_response = json_encode($response);
-    echo $json_response;
+    
+    echo json_encode($array_response);
 ?>
